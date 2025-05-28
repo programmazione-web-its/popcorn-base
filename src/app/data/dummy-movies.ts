@@ -1,4 +1,4 @@
-const DUMMY_MOVIES = [
+export const DUMMY_MOVIES = [
   {
     adult: false,
     gender: 1,
