@@ -16,7 +16,7 @@ export class RandomMovieComponent {
 
   onGetRandomMovie() {
     const randomIdx = Math.floor(Math.random() * DUMMY_MOVIES.length);
-    console.log(randomIdx);
+
     this.movie = DUMMY_MOVIES[randomIdx];
   }
   get posterPath() {

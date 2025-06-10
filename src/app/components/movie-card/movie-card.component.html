@@ -3,7 +3,7 @@
   <div class="card-body">
     <h3 class="card-title">{{ movie.title }}</h3>
     @if (movie.overview) {
-      <p class="card-text"> {{movie.overview}} </p>
+      <p class="card-text multiline-truncate"> {{movie.overview}} </p>
     }
 
     <app-popcorn-rating [rating]="movie.vote_average" />
