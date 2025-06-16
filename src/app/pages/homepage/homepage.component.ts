@@ -1,11 +1,12 @@
-import { Component, inject } from '@angular/core';
-import { RandomMovieComponent } from '../../components/random-movie/random-movie.component';
-import { MovieListComponent } from '../../components/movie-list/movie-list.component';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActorListComponent } from '../../components/actor-list/actor-list.component';
+import { MovieListComponent } from '../../components/movie-list/movie-list.component';
+import { RandomMovieComponent } from '../../components/random-movie/random-movie.component';
 
-import { ActorService } from '../../services/actor.service';
-import { DUMMY_MOVIES } from '../../data/dummy-movies';
 import { DUMMY_ACTORS } from '../../data/dummy-actors';
+import { Movie } from '../../models/movie.model';
+import { ActorService } from '../../services/actor.service';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-homepage',
@@ -14,15 +15,30 @@ import { DUMMY_ACTORS } from '../../data/dummy-actors';
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',
 })
-export class HomepageComponent {
-  movies = DUMMY_MOVIES;
+export class HomepageComponent implements OnInit {
+  movies: Movie[] = [];
   actors = DUMMY_ACTORS;
-
   private actorService = inject(ActorService);
+  private movieService = inject(MovieService);
+  ngOnInit(): void {
+    this.movieService.getMovies().subscribe({
+      next: (movies) => {
+        if (!movies) {
+          this.movies = [];
+          return;
+        }
+        this.movies = movies.results;
+      },
+      error: (err) => {
+        console.error('Errore:', err);
+        this.movies = [];
+      },
+    });
+  }
 
   get bestFourMovies() {
     return [...this.movies]
-      .sort((a, b) => b.vote_average - a.vote_average)
+      .sort((a, b) => (b.vote_average ?? 0) - (a.vote_average ?? 0))
       .slice(0, 4);
   }
 

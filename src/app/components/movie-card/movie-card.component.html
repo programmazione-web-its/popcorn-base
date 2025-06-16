@@ -1,5 +1,5 @@
-<div [id]="movie.id" class="card my-3">
-  <img [src]="posterPath" [alt]="posterAlt" class="card-img-top">
+<a [routerLink]="['movies', movie.id]"  [id]="movie.id" class="card my-3 text-decoration-none">
+  <img [src]="movie | moviePoster" [alt]="movie | movieAlt" class="card-img-top">
   <div class="card-body">
     <h3 class="card-title">{{ movie.title }}</h3>
     @if (movie.overview) {
@@ -8,4 +8,4 @@
 
     <app-popcorn-rating [rating]="movie.vote_average" />
   </div>
-</div>
+</a>
