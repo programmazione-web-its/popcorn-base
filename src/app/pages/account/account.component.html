@@ -1,0 +1,24 @@
+@if (UserAuthService.isLoggedinIn) {
+<div class="container d-flex align-items-center justify-content-between my-5">
+  <h2>Ciao {{ UserAuthService.user?.username }}!</h2>
+  <div
+    class="avatar rounded-circle bg-primary-subtle text-secondary d-flex align-items-center justify-content-center fs-1 fw-bold">
+    {{ firstLetter }}</div>
+</div>
+} @else {
+<div class="container my-5 py-5">
+  <div class="mx-auto col-lg-6">
+    <form>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+      </div>
+      <button type="submit" class="btn btn-primary">Accedi</button>
+    </form>
+  </div>
+</div>
+}

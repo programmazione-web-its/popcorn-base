@@ -1,4 +1,9 @@
-<header class="container d-flex justify-content-between bg-primary">
-  <img [src]="imagePath" alt="PopCornBase Logo">
-  <button (click)="onUserClick()">Ciao, {{ username }}</button>
+<header class="container d-flex  bg-primary align-items-lg-center rounded-3 mt-3 gap-3">
+  <a routerLink=""><img [src]="imagePath" alt="PopCornBase Logo"></a>
+  <nav class="ms-auto  d-flex align-items-center  gap-3">
+
+    <a routerLink="cerca-film" class="text-white">Cerca film</a>
+  </nav>
+  <app-button [isSecondary]="true" (btnClicked)="onUserClick()"
+    [title]="userAuthService.isLoggedinIn ? 'Account' : 'Login'" />
 </header>
