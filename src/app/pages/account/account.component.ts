@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { UserAuthService } from '../../services/user-auth.service';
+import { NgForm, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-account',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './account.component.html',
   styleUrl: './account.component.scss',
 })
@@ -13,5 +14,9 @@ export class AccountComponent {
 
   get firstLetter() {
     return this.UserAuthService.user?.username.charAt(0);
+  }
+
+  onSubmit(formData: NgForm) {
+    console.log(formData);
   }
 }

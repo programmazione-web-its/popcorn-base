@@ -1,8 +1,8 @@
 import { Component, inject, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Movie } from '../../models/movie.model';
-import { MovieAltPipe } from '../../pipes/movie-alt.pipe';
-import { MoviePosterPipe } from '../../pipes/movie-poster.pipe';
+import { MovieAltPipe } from '../../pipes/movieAlt.pipe';
+import { MoviePosterPipe } from '../../pipes/moviePoster.pipe';
 import { MovieService } from '../../services/movie.service';
 import { PopcornRatingComponent } from '../popcorn-rating/popcorn-rating.component';
 

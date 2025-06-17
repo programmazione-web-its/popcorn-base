@@ -30,4 +30,25 @@ export class MovieService {
   getPosterAlt(movie: Movie): string {
     return 'Poster di ' + movie.title;
   }
+
+  searchMovies(
+    query: string,
+    include_adult: boolean = false,
+    year?: string
+  ): Observable<MovieApiRes> {
+    const params = new URLSearchParams({
+      query,
+      include_adult: String(include_adult),
+      language: 'en-US',
+      page: '1',
+    });
+
+    if (year) {
+      params.append('year', year);
+    }
+
+    return this.apiService.getData<MovieApiRes>(
+      `/search/movie?${params.toString()}`
+    );
+  }
 }
