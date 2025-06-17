@@ -1,59 +1,56 @@
 <div class="filters container my-5">
-<form class="row g-3 align-items-end ">
-  <!-- Campo di ricerca -->
-  <div class="col-md-5">
-    <label for="search" class="form-label">Cerca film</label>
-    <input
-      type="text"
-      id="search"
-      class="form-control"
-      placeholder="Titolo del film"
-      name="search"
-    />
-  </div>
+  <form #form="ngForm" class="row g-3 align-items-end">
+    <!-- Campo di ricerca -->
+    <div class="col-md-5">
+      <label for="search" class="form-label">Cerca film</label>
+      <input type="text" id="search" class="form-control" placeholder="Titolo del film" name="search" required
+        minlength="3" ngModel #search="ngModel" />
+    </div>
 
-  <!-- Select Anno -->
-  <div class="col-md-2">
-    <label for="year" class="form-label">Anno</label>
-    <select id="year" class="form-select" name="year">
-      <option value="">Tutti</option>
-      <option value="2024">2024</option>
-      <option value="2023">2023</option>
-      <option value="2022">2022</option>
-      <option value="2021">2021</option>
-      <option value="2020">2020</option>
-      <!-- Altri anni... -->
-    </select>
-  </div>
+    <!-- Select Anno -->
+    <div class="col-md-2">
+      <label for="year" class="form-label">Anno</label>
+      <select id="year" class="form-select" name="year" ngModel>
+        <option value="">Tutti</option>
+        @for (year of years; track year) {
+        <option [value]="year">{{year}}</option>
+        }
+        <!-- Altri anni... -->
+      </select>
+    </div>
 
-  <!-- Select Genere -->
-  <div class="col-md-2">
-    <label for="genre" class="form-label">Genere</label>
-    <select id="genre" class="form-select" name="genre">
-      <option value="">Tutti</option>
-      <option value="action">Azione</option>
-      <option value="comedy">Commedia</option>
-      <option value="drama">Drammatico</option>
-      <option value="horror">Horror</option>
-      <!-- Altri generi... -->
-    </select>
-  </div>
+    <!-- Select Genere -->
+    <div class="col-md-2">
+      <label for="genre" class="form-label">Genere</label>
+      <select id="genre" class="form-select" name="genre">
 
-  <!-- Select Ordina per -->
-  <div class="col-md-2">
-    <label for="sort" class="form-label">Ordina per</label>
-    <select id="sort" class="form-select" name="sort">
-      <option value="">Predefinito</option>
-      <option value="popularity">Popolarità</option>
-      <option value="release_date">Data di uscita</option>
-      <option value="vote_average">Voto medio</option>
-    </select>
-  </div>
+        <option value="">Tutti</option>
+        @for (genre of genres; track genre.id) {
+        <option [value]="genre.id">{{genre.name}}</option>
+        }
+      </select>
+    </div>
 
-  <!-- Pulsante Filtra -->
-  <div class="col-md-1 ms-auto">
-    <button class="btn btn-primary" type="submit">Filtra</button>
-  </div>
-</form>
+    <!-- Select Ordina per -->
+    <div class="col-md-2">
+      <label for="sort" class="form-label">Ordina per</label>
+      <select id="sort" class="form-select" name="sort">
+        <option value="">Predefinito</option>
+        <option value="popularity">Popolarità</option>
+        <option value="release_date">Data di uscita</option>
+        <option value="vote_average">Voto medio</option>
+      </select>
+    </div>
 
+    <!-- Pulsante Filtra -->
+    <div class="col-md-1 ms-auto">
+      <button class="btn btn-primary" type="submit">Filtra</button>
+    </div>
+
+  </form>
+</div>
+<div class="container">
+  @if (movies.length > 0) {
+  <app-movie-list [movies]="movies" />
+  }
 </div>
