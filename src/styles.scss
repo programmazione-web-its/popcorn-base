@@ -7,4 +7,12 @@ $yellow: #ffb000;
 // Custom.scss
 
 @import "bootstrap/scss/bootstrap";
-//
+
+// form validation stlyling
+input {
+  &.ng-touched {
+    &.ng-invalid {
+      border: 1px solid $primary;
+    }
+  }
+}

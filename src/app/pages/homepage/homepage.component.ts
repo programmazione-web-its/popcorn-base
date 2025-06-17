@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActorListComponent } from '../../components/actor-list/actor-list.component';
 import { MovieListComponent } from '../../components/movie-list/movie-list.component';
 import { RandomMovieComponent } from '../../components/random-movie/random-movie.component';
@@ -17,10 +17,12 @@ import { MovieService } from '../../services/movie.service';
 })
 export class HomepageComponent implements OnInit {
   movies: Movie[] = [];
+  isFetching: boolean = false;
   actors = DUMMY_ACTORS;
   private actorService = inject(ActorService);
   private movieService = inject(MovieService);
   ngOnInit(): void {
+    this.isFetching = true;
     this.movieService.getMovies().subscribe({
       next: (movies) => {
         if (!movies) {
@@ -28,6 +30,9 @@ export class HomepageComponent implements OnInit {
           return;
         }
         this.movies = movies.results;
+      },
+      complete: () => {
+        this.isFetching = false;
       },
       error: (err) => {
         console.error('Errore:', err);
