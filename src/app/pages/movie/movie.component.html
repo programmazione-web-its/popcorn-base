@@ -2,18 +2,26 @@
 <div [id]="movie.id" class="container my-5">
   <div class="row">
     <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-      <img [src]="movie | moviePoster" [alt]="movie | movieAlt" class="img-fluid">
+      <img
+        [src]="movie | moviePoster"
+        [alt]="movie | movieAlt"
+        class="img-fluid"
+      />
     </div>
     <div class="col-12 col-md-6">
-
-      <h1 class="mb-4">{{movie.title}}</h1>
+      <h1 class="mb-4">{{ movie.title }}</h1>
       <app-popcorn-rating [rating]="movie.vote_average" />
       @if (movie.overview) {
-      <p class="my-2">{{movie.overview}}</p>
+      <p class="my-2">{{ movie.overview }}</p>
       }
-
       <div>
-        <p>Anno di uscita : {{movie.release_date}}</p>
+        @for (genre of movie.genres ; let i = $index; track genre.id) {
+
+        {{ genre.name }}
+        @if (i !== movie.genres.length - 1) {, } }
+      </div>
+      <div>
+        <p>Anno di uscita : {{ movie.release_date }}</p>
       </div>
     </div>
   </div>
