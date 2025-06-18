@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { Movie } from '../../models/movie.model';
 import { MovieAltPipe } from '../../pipes/movieAlt.pipe';
 import { MoviePosterPipe } from '../../pipes/moviePoster.pipe';
@@ -9,7 +9,13 @@ import { PopcornRatingComponent } from '../popcorn-rating/popcorn-rating.compone
 @Component({
   selector: 'app-movie-card',
   standalone: true,
-  imports: [PopcornRatingComponent, RouterLink, MovieAltPipe, MoviePosterPipe],
+  imports: [
+    PopcornRatingComponent,
+    RouterLink,
+    MovieAltPipe,
+    MoviePosterPipe,
+    RouterModule,
+  ],
   templateUrl: './movie-card.component.html',
   styleUrl: './movie-card.component.scss',
 })

@@ -5,7 +5,16 @@
       <img [src]="movie | moviePoster" [alt]="movie | movieAlt" class="img-fluid">
     </div>
     <div class="col-12 col-md-6">
-      <h1>{{movie.title}}</h1>
+
+      <h1 class="mb-4">{{movie.title}}</h1>
+      <app-popcorn-rating [rating]="movie.vote_average" />
+      @if (movie.overview) {
+      <p class="my-2">{{movie.overview}}</p>
+      }
+
+      <div>
+        <p>Anno di uscita : {{movie.release_date}}</p>
+      </div>
     </div>
   </div>
 </div>

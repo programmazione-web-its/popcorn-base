@@ -1,9 +1,9 @@
-import { Injectable, inject } from '@angular/core';
-import { ApiService } from './api.services';
+import { Injectable } from '@angular/core';
 import { Movie, MovieApiRes } from '../models/movie.model';
+import { ApiService } from './api.services';
 
-import { DUMMY_MOVIES } from '../data/dummy-movies';
 import { Observable } from 'rxjs';
+import { DUMMY_MOVIES } from '../data/dummy-movies';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
 export class MovieService {
   constructor(private apiService: ApiService) {}
   movie: Movie | null = null;
-  movies = DUMMY_MOVIES;
 
   getMovies(): Observable<MovieApiRes> {
     return this.apiService.getData<MovieApiRes>(
@@ -19,8 +18,8 @@ export class MovieService {
     );
   }
 
-  getCurrentMovie(id: number): Movie | undefined {
-    return this.movies.find((movie) => movie.id === id) || undefined;
+  getCurrentMovie(id: number): Observable<Movie> {
+    return this.apiService.getData<Movie>(`movie/${id}?language=it-IT&page=1`);
   }
   // UTILS
   getPosterPath(movie: Movie): string {

@@ -1,4 +1,10 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { Movie } from '../../models/movie.model';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
 
@@ -9,7 +15,15 @@ import { MovieCardComponent } from '../movie-card/movie-card.component';
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.scss',
 })
-export class MovieListComponent {
+export class MovieListComponent implements OnInit, OnChanges {
   @Input() title?: string;
   @Input({ required: true }) movies!: Movie[];
+
+  ngOnInit(): void {
+    console.log('Componente inizializzato');
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('changes', changes);
+  }
 }
