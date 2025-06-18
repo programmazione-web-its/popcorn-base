@@ -15,7 +15,7 @@ export class MovieService {
 
   getMovies(): Observable<MovieApiRes> {
     return this.apiService.getData<MovieApiRes>(
-      `movie/popular?language=en-US&page=1`
+      `movie/popular?language=it-IT&page=1`
     );
   }
 
@@ -39,7 +39,7 @@ export class MovieService {
     const params = new URLSearchParams({
       query,
       include_adult: String(include_adult),
-      language: 'en-US',
+      language: 'it-IT',
       page: '1',
     });
 
