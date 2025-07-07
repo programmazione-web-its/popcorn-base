@@ -25,6 +25,31 @@ export class UserAuthService {
   requestToken(): Observable<Token> {
     return this.apiService.getData<Token>('authentication/token/new');
   }
+  tokenIsExpired() {
+    if (!this.token) return;
+    return new Date() < new Date(this.token.expires_at);
+  }
+
+  initSession() {
+    const currentSession = localStorage.getItem('session_id');
+    const currentExpiration = localStorage.getItem('expires_at');
+
+    if (
+      !currentSession ||
+      !currentExpiration ||
+      new Date() >= new Date(currentExpiration)
+    )
+      return;
+    this.sessionId = currentSession;
+    this.apiService
+      .getData<User>(`account?session_id=${this.sessionId}`)
+      .subscribe({
+        next: res => {
+          this.user = res;
+          this.isLoggedIn = true;
+        }
+      });
+  }
 
   login(username: string, password: string): Observable<User> {
     // this.requestToken().subscribe({
@@ -63,6 +88,8 @@ export class UserAuthService {
             }),
             switchMap(sessioRes => {
               this.sessionId = sessioRes.session_id;
+              localStorage.setItem('session_id', sessioRes.session_id);
+              localStorage.setItem('expires_at', token.expires_at);
               return this.apiService.getData<User>(
                 `account?session_id=${sessioRes.session_id}`
               );
