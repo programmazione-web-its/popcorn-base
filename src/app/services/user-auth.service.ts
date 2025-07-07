@@ -47,6 +47,9 @@ export class UserAuthService {
         next: res => {
           this.user = res;
           this.isLoggedIn = true;
+        },
+        error: err => {
+          throw new Error(err);
         }
       });
   }
