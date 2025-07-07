@@ -11,6 +11,10 @@ export class ApiService {
 
   getData<T>(endpoint: string): Observable<T> {
     // quel <T> ci dice: questa funzione restituisce dati di un tipo che decideremo in fase di utilizzo
-    return this.httpClient.get<T>(`${this.baseUrl}/${endpoint}`);
+    return this.httpClient.get<T>(`${this.baseUrl}${endpoint}`);
+  }
+
+  postData<T>(endpoint: string, params: any): Observable<T> {
+    return this.httpClient.post<T>(`${this.baseUrl}${endpoint}`, params);
   }
 }

@@ -9,7 +9,7 @@ import { ButtonComponent } from '../button/button.component';
   standalone: true,
   imports: [ButtonComponent, RouterLink],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+  styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
   isClicked = false;
