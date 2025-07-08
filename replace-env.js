@@ -10,7 +10,7 @@ let content = fs.readFileSync(envProdFilePath, "utf-8");
 
 // Sostituisci il token con la variabile di ambiente fornita da Vercel
 const apiToken = process.env.NG_APP_BEARER_TOKEN || ""; // Puoi sostituire con un valore di default
-content = content.replace("process.env.NG_APP_BEARER_TOKEN", `'${apiToken}'`);
+content = content.replace("token", `'${apiToken}'`);
 
 // Scrivi il contenuto modificato nel file
 fs.writeFileSync(envProdFilePath, content);
