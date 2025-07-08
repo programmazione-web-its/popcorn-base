@@ -7,7 +7,6 @@ const envProdFilePath = path.resolve(__dirname, "src/envs/env.prod.ts");
 
 // Leggi il contenuto del file environment.prod.ts
 let content = fs.readFileSync(envProdFilePath, "utf-8");
-console.log("Starting replace-env.js...");
 
 // Ottieni il valore della variabile di ambiente NG_APP_BEARER_TOKEN (da Vercel o locale)
 const apiToken = process.env.NG_APP_BEARER_TOKEN || ""; // Usa un valore di default se non è presente
@@ -17,7 +16,7 @@ console.log("API Token:", apiToken);
 
 // Sostituisci la stringa 'process.env.NG_APP_BEARER_TOKEN' con il valore della variabile di ambiente
 content = content.replace(
-  /'process.env.NG_APP_BEARER_TOKEN'/g, // Cerca la stringa con le virgolette
+  "process.env.NG_APP_BEARER_TOKEN", // Cerca la stringa con le virgolette
   `'${apiToken}'` // Sostituisci con il valore della variabile d'ambiente
 );
 
