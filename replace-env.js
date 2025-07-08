@@ -23,4 +23,8 @@ content = content.replace(
 // Scrivi il contenuto modificato nel file
 fs.writeFileSync(envProdFilePath, content);
 
+// Aggiungi un log per stampare il contenuto finale
+console.log("Contenuto del file dopo la sostituzione:");
+console.log(content); // Questo mostrerà il contenuto modificato del file
+
 console.log("File environment.prod.ts aggiornato con il token API.");
