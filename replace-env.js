@@ -16,15 +16,13 @@ console.log("API Token:", apiToken);
 
 // Sostituisci la stringa 'process.env.NG_APP_BEARER_TOKEN' con il valore della variabile di ambiente
 content = content.replace(
-  "process.env.NG_APP_BEARER_TOKEN", // Cerca la stringa con le virgolette
+  /'process.env.NG_APP_BEARER_TOKEN'/g, // Cerca la stringa con le virgolette
   `'${apiToken}'` // Sostituisci con il valore della variabile d'ambiente
 );
 
 // Scrivi il contenuto modificato nel file
 fs.writeFileSync(envProdFilePath, content);
-
 // Aggiungi un log per stampare il contenuto finale
 console.log("Contenuto del file dopo la sostituzione:");
 console.log(content); // Questo mostrerà il contenuto modificato del file
-
 console.log("File environment.prod.ts aggiornato con il token API.");
